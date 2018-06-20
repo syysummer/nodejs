@@ -3,7 +3,7 @@ const  fs = require("fs");
 fs.open("hello.txt","w",0o666,(err,fd) => {
  if(!err){
      console.log("open成功了");
-     fs.write(fd,"今天又下雨了呢",0,"utf8",(err,fd) =>{
+     fs.write(fd,"今天又下雨了呢",0,"utf8",(err,written,string) =>{
          if(!err){
              console.log("write 成功了")
          }else{

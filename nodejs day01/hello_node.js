@@ -1,8 +1,8 @@
 //引入模块
-// let m1 = require("./module1");
-// let m2 = require("./module2");
-// console.log(m1.add(4, 5), m1.mul(4, 5));
-// console.log(m2.boy, m2.girl);
+let m1 = require("./module1");
+let m2 = require("./module2");
+console.log(m1.add(4, 5), m1.mul(4, 5));
+console.log(m2.boy, m2.girl);
 
 let obj = {
     innerObj:{

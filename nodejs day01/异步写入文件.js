@@ -1,3 +1,4 @@
+
 const  fs = require("fs");
 //console.log(fs);
 fs.open("hello.txt","w",0o666,(err,fd) => {

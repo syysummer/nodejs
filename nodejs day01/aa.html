@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    // let arr = ["1","2","3"];
+    // let arr1 = arr.map(parseInt);
+    // console.log(arr1);
+
+    function parseInt(string,radix){ }
+
+    let arr = ["1","2","3"];
+    console.log(parseInt("1",0)); //1
+    //radix如果省略该参数,或者其值为0,则数值将以10的基础来解析
+
+    console.log(parseInt("2",1)); //NaN
+    console.log(parseInt("3",2)); //NaN
+    // 字符串中的数字不能大于radix才能正确返回数字结果值,
+
+    let arr1 = arr.map(parseInt);
+    console.log(arr1); // [1, NaN, NaN]
+
+
+    console.log(parseInt("4",2))
+
+</script>
+</body>
+</html>

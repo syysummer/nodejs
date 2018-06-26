@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script src="jquery-1.12.4.js"></script>
+<script>
+    var script = document.createElement("script");
+    function callback(data){
+        console.log(data);
+    }
+    script.src = "http://localhost:3000/ajax?callback=callback";
+    document.body.appendChild(script);
+</script>
+</body>
+</html>

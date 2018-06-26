@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8">
+	<title>三级联动</title>
+</head>
+<body>
+
+<select id="province">
+	<option>请选择省份</option>
+</select> 省
+
+<select id="city">
+	<option>请选择市</option>
+</select> 市
+
+<select id="county">
+	<option>请选择区(县)</option>
+</select> 区(县)
+<!--<script type="text/javascript" src="../jquery-3.3.1.js"></script>-->
+<script type="text/javascript" src="./js/jquery-1.12.4.js"></script>
+<script type="text/javascript">
+	//获取select元素
+	$(function (){
+	  $province = $("#province");
+	  $city = $("#city");
+	  $county = $("#county");
+	$.get("/province", function(result){
+        if(result.status === "ok"){
+        var html = "<option>请选择省份</option>";
+        result.data.forEach(function (item,index){
+          html += "<option value = "+item.province+">"+ item.name +"</option>"
+        });
+        $province.html(html);
+       }else{
+            console.log(result);
+        }
+	});
+     $province.change(function (){
+         var province = this.value + "";
+        $county.children(":not(:first)").remove();
+	   $.get("/city?province="+province,function (result){
+           if(result.status === "ok"){
+               var html = "<option>请选择市</option>";
+               result.data.forEach(function (item,index){
+                   html += "<option value = "+item.city+">"+ item.name +"</option>"
+               });
+               $city.html(html);
+           }else{
+               $city.children(":not(:first)").remove();
+           }
+	   })
+	});
+
+    $city.change(function (){
+			var province = $province.val() + "";
+			var city = this.value +"";
+            $.get("/county",{province:province,city:city},function (result){
+                if(result.status === "ok"){
+                    var html = "<option>请选择区/县</option>";
+                    result.data.forEach(function (item,index){
+                        html += "<option value = "+item.county+">"+ item.name +"</option>"
+                    });
+                    $county.html(html);
+                }else{
+                    $county.children(":not(:first)").remove();
+                }
+            })
+        })
+	})
+</script>
+</body>
+</html>

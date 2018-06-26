@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<input type="text" placeholder="输入验证码">
+<button id="btn">发送验证码</button>
+
+<script>
+   window.onload = function (){
+        var btn = document.getElementById("btn");
+        var isSend = false;
+        var hasXHR = null;
+        var lastTime = 0;
+        const TIME = 5;
+      btn.onclick = function (){
+        var nowTime = Date.now();
+        if(nowTime - lastTime >= TIME*1000){
+            isSend = false;
+        }
+        if(isSend){
+           return;
+        }
+        isSend = true;
+        lastTime = nowTime;
+        this.style.color = "gray";
+        this.innerText = "已发送"+TIME+"s";
+        if(hasXHR){
+            hasXHR.abort();
+            hasXHR = sendAjax();
+        }else{
+            hasXHR = sendAjax();
+        }
+        var time = TIME;
+        var timer = setInterval(function (){
+        time--;
+            btn.innerText = "已发送"+time+"s";
+        if(time <= 0){
+            clearInterval(timer);
+            btn.style.color = "black";
+            btn.innerText = "发送验证码";
+        }
+        },1000);
+        //发送Ajax
+        function sendAjax(){
+        var xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function (){
+        if(xhr.readyState === 4 && xhr.status == 200){
+            console.log(xhr);
+            hasXHR = null;
+        }
+        };
+        xhr.open("GET","/ajax?username=sunwukong");
+        xhr.setRequestHeader("Content-Type", "text/html");
+        xhr.send();
+        return xhr;
+        }
+       }
+   }
+
+</script>
+</body>
+</html>

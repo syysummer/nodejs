@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<button id="btn">发送验证码</button>
+<script src="jquery-3.3.1.js"></script>
+<script>
+    $(function (){
+    $btn = $("#btn");
+        $btn.click(function (){
+        $.get("/jQueryAjax",function (data){
+            console.log("22222");
+        })
+        })
+    })
+</script>
+</body>
+</html>
